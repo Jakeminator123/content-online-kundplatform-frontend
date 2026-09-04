@@ -1,18 +1,26 @@
 # content-online-kundplatform-frontend
 
+## Publicerad kundportal och separat Content Online-admin
+
+Kundportalen finns på https://fokus-psi-sable.vercel.app/login och nås även från https://content-online-platform.vercel.app. Kundvyerna och KTH-demokontona ligger kvar i detta repo.
+
+Content Online-admin finns i plattformsrepot på https://content-online-platform.vercel.app/admin/login. `/content-online` och `/content-online/login` i denna frontend redirectar dit; de öppnar inte längre den tidigare lokala personaldemon. Clerk och den interna serverkontrollerade adminbehörigheten delas inte med kundernas demosessioner.
+
+Clerk är anslutet som utvecklingsinstans. Användar-/publicistadministration och beständig lagring återstår. Inga riktiga kunddata får anslutas till den befintliga demonstrationsinloggningen.
+
 ## Lokal körning och backendkoppling
 
 Kör backendprojektets `npm run dev` på port 3000. Kör sedan `corepack pnpm install --frozen-lockfile` och `corepack pnpm dev` i detta repo. Frontend använder port 3001 och binder till 127.0.0.1.
 
 - Kundernas demoinloggning: http://127.0.0.1:3001/login
-- Content Onlines separata personalinloggning: http://127.0.0.1:3001/content-online/login
+- Content Onlines separata personalinloggning: https://content-online-platform.vercel.app/admin/login
 - Kundernas anslutna vy: http://127.0.0.1:3001/kundservice
 
-Personalens lokala demo använder en egen ogenomskinlig session och cookie, separat från kundsessionen. Åtkomst till en kund kontrolleras mot backendens `/v1/me` och sedan igen av varje backendendpoint. En kundcookie ger inte personalbehörighet. Personalutloggning återkallar sessionen på servern.
+Äldre lokala personalhjälpare ligger kvar för regressionstest men är inte längre en navigerbar personalportal. Kunddemon använder fortsatt den lokala backendadaptern endast vid utvecklingskörning. Kundens cookie får aldrig ge Content Online-adminbehörighet.
 
 Kunddemon mappar befintliga Hampus (admin) och Bibbi (staff) till backendens syntetiska kundadmin respektive kundläsare. Namnen är presentationskonton, inte riktiga KTH-konton. Kundläsaren får inte pris/CPD eller medlemslista från den anslutna vyn och ser endast egna ärenden. Personal får endast sin tilldelade testkund, org-a.
 
-`/kundservice` och personalvyn hämtar resurser, statistik, användare och ärenden från backend. Övriga befintliga kundvyer använder fortfarande `lib/data.ts` med exempeldata. De två datamängderna är inte samma källa och deras siffror ska inte jämföras som verklig kundstatistik.
+`/kundservice` hämtar i lokal utveckling resurser, statistik, användare och ärenden från backend. Övriga befintliga kundvyer använder fortfarande `lib/data.ts` med exempeldata. De två datamängderna är inte samma källa och deras siffror ska inte jämföras som verklig kundstatistik.
 
 Alla data är syntetiska. Ärenden skapas via backend och sparas i minnet tills backend startas om. De skickas inte till Salesforce, Fortnox eller e-post. IEEE/MPS-mått redovisas med källdefinition; ingen gemensam standard för alla publicister förutsätts.
 
@@ -20,13 +28,13 @@ Alla data är syntetiska. Ärenden skapas via backend och sparas i minnet tills 
 
 GitHub main deployas automatiskt till Vercel-projektet `fokus`. Personaldemon och anrop med demotokens är avstängda vid alla produktionsbyggen och i Vercels miljöer, även previews. Tokens kan endast skickas till den fasta loopbackadressen http://127.0.0.1:3000, och redirect följs inte.
 
-Riktig personalinloggning behöver ännu anslutas till en identitetsleverantör och backendens OIDC-validering samt beständiga användare/medlemskap. Ingen sådan koppling har aktiverats. Den äldre kundinloggningen har fortfarande demonstrationskonton och en reservnyckel i koden; den ska ersättas innan verkliga kunddata ansluts. Den ger ingen åtkomst till den skyddade produktionsbackenden.
+Personalinloggningen är nu ansluten separat i plattformsrepot med Clerk och server-side allowlist. Det innebär inte att kund-API:t eller användar-/publicistadministrationen är anslutet. Den äldre kundinloggningen har fortfarande demonstrationskonton och en reservnyckel i koden; den ska ersättas innan verkliga kunddata ansluts. Den ger ingen åtkomst till den skyddade produktionsbackenden.
 
 ### Verifiering
 
 `corepack pnpm test` testar sessionsformat, utgångstid, återkallande, separation mellan kund/personal, tenantgränser, nekad demokörning i produktion, läsarbehörighet och felhantering. `corepack pnpm typecheck` och `corepack pnpm build` kontrollerar typer och produktion. Bygget stoppar nu även vid typfel.
 
-Browserflöde: logga in som kund → skapa ett syntetiskt ärende → öppna personaldemon → se samma ärende → logga ut personal → kontrollera att kundsessionen inte öppnar personalvyn. Testärenden kan finnas kvar i den lokala backendens minne efter verifieringen.
+Tidigare lokala regressionstester omfattade delade syntetiska tickets mellan kund och operatör. Den aktuella publicerade gränsen är i stället kunddemo → separat Content Online-inloggning. Första administratören måste själv verifiera sin e-post hos Clerk. Kundsessionen får inte ge åtkomst till plattformens `/admin/api/*`.
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [v0](https://v0.app).
 
