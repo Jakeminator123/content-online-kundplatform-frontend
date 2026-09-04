@@ -70,9 +70,8 @@ export async function createSession(user: User) {
   const store = await cookies()
   store.set(SESSION_COOKIE, token, {
     httpOnly: true,
-    // The v0 preview renders the app inside a cross-origin iframe; a Lax cookie is dropped there.
-    sameSite: 'none',
-    secure: true,
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    secure: process.env.NODE_ENV === 'production',
     path: '/',
     maxAge: SESSION_TTL_MS / 1000,
   })

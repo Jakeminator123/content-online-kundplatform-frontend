@@ -1,4 +1,5 @@
 import { LoginForm } from '@/components/login/login-form'
+import Link from 'next/link'
 import { OrgMark } from '@/components/org-mark'
 import { organisation, totals } from '@/lib/data'
 import { fmtCompact, fmtPercent, fmtSekPrecise } from '@/lib/format'
@@ -69,6 +70,10 @@ export default async function LoginPage({
             </p>
           </div>
           <LoginForm next={next} />
+          <Link href="/content-online/login" className="text-sm font-medium text-primary underline underline-offset-4">
+            Personal på Content Online →
+          </Link>
+          <p className="text-xs text-muted-foreground">Demomiljö med exempeldata. KTH:s riktiga inloggning är inte ansluten.</p>
           <p className="text-xs leading-relaxed text-muted-foreground">
             Behöver du åtkomst? Kontakta {organisation.accountManager.name},{' '}
             <a

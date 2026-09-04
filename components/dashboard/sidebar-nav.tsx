@@ -28,6 +28,7 @@ const items: NavItem[] = [
   { href: '/efterfragan', label: 'Efterfrågan', icon: Sparkles, badge: '5' },
   { href: '/nyheter', label: 'Från förlagen', icon: Newspaper },
   { href: '/dokument', label: 'Dokument', icon: FolderLock },
+  { href: '/kundservice', label: 'Kundservice & källdata', icon: Settings2 },
   { href: '/admin', label: 'Administration', icon: Settings2, adminOnly: true },
 ]
 

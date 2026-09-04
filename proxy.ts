@@ -3,6 +3,10 @@ import { SESSION_COOKIE, verifySession } from '@/lib/session-token'
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
+  // This area authenticates its independent staff cookie on every page/action.
+  if (pathname === '/content-online' || pathname.startsWith('/content-online/')) {
+    return NextResponse.next()
+  }
   const session = await verifySession(request.cookies.get(SESSION_COOKIE)?.value)
 
   if (pathname.startsWith('/login')) {

@@ -2,7 +2,7 @@
 const nextConfig = {
   allowedDevOrigins: ['127.0.0.1'],
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   images: {
     unoptimized: true,

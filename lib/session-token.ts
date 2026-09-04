@@ -40,9 +40,11 @@ export async function signSession(payload: SessionPayload) {
 }
 
 export async function verifySession(token: string | undefined): Promise<SessionPayload | null> {
-  if (!token) return null
-  const [body, signature] = token.split('.')
-  if (!body || !signature) return null
+  if (!token || token.length > 4096) return null
+  const parts = token.split('.')
+  const [body, signature] = parts
+  if (parts.length !== 2 || !body || !signature) return null
+  if (!/^[A-Za-z0-9_-]+$/.test(body) || !/^[A-Za-z0-9_-]+$/.test(signature)) return null
   try {
     const valid = await crypto.subtle.verify(
       'HMAC',
@@ -51,8 +53,11 @@ export async function verifySession(token: string | undefined): Promise<SessionP
       encoder.encode(body),
     )
     if (!valid) return null
-    const payload = JSON.parse(new TextDecoder().decode(fromBase64Url(body))) as SessionPayload
-    if (payload.exp < Date.now()) return null
+    const payload = JSON.parse(new TextDecoder().decode(fromBase64Url(body)))
+    if (!payload || typeof payload !== 'object') return null
+    if (typeof payload.username !== 'string' || !payload.username || payload.username.length > 120) return null
+    if (payload.role !== 'admin' && payload.role !== 'staff') return null
+    if (typeof payload.exp !== 'number' || !Number.isFinite(payload.exp) || payload.exp <= Date.now()) return null
     return payload
   } catch {
     return null

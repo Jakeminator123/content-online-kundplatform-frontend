@@ -17,6 +17,9 @@ export default async function DashboardLayout({ children }: { children: React.Re
       <div className="flex min-w-0 flex-1 flex-col">
         <Topbar user={user} dateLabel={dateLabel.charAt(0).toUpperCase() + dateLabel.slice(1)} />
         <main className="flex-1 px-4 py-8 md:px-8 lg:py-10">
+          <p className="mx-auto mb-6 max-w-6xl rounded-lg border bg-card px-4 py-3 text-sm text-muted-foreground">
+            Demomiljö · Uppgifterna är syntetiska. Kundservice & källdata visar den anslutna lokala backendens testdata.
+          </p>
           <div className="mx-auto flex w-full max-w-6xl flex-col gap-10">{children}</div>
         </main>
       </div>
