@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { ShieldCheck, UserRound } from 'lucide-react'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
@@ -30,7 +31,8 @@ export default async function AdminPage() {
     <>
       <PageHeader
         eyebrow="KTH:s portaladministration"
-        title="Användare och portalinformation"
+        title="Er organisation. Era användare."
+        action={<Link href="/kundservice?arende=anvandare" className="rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground">Förbered användarfråga →</Link>}
         description="Kundadministratören ser KTH:s egna portalanvändare och inställningar. Ändringar begärs via kundservice tills säker medlemshantering är ansluten."
       />
 

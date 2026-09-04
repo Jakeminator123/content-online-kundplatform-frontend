@@ -116,3 +116,34 @@
     font-variant-numeric: tabular-nums;
   }
 }
+
+/* Shared customer workspace: crisp ink, quiet surfaces, restrained accents. */
+:root {
+  --ink: #182f40;
+  --foreground: var(--ink);
+  --card-foreground: var(--ink);
+  --background: #f5f7f9;
+  --brand: #285b70;
+  --brand-soft: #ecf3f5;
+  --border: #e2e8ed;
+  --input: #dce5eb;
+  --muted-foreground: #72818d;
+  --sidebar: #132a39;
+  --sidebar-accent: #254353;
+  --chart-1: #338578;
+  --chart-2: #b2d6cc;
+  --radius: .65rem;
+}
+.metric-tile { border:1px solid var(--border); border-radius:11px; background:#fff; padding:21px 22px; box-shadow:0 2px 3px #1a304003; }
+.resource-tile { display:flex;flex-direction:column;min-width:0;border:1px solid var(--border);border-radius:11px;background:white;padding:22px;transition:box-shadow .18s,border-color .18s; }
+.resource-tile:hover {border-color:#a5c6c2;box-shadow:0 7px 20px #1c4a5010;}
+.publisher-mark {display:grid;place-items:center;width:40px;height:40px;border:1px solid #e1eaf0;border-radius:9px;color:#396a80;background:#f3f7fa;font-size:11px;font-weight:650;letter-spacing:-.4px;}
+.status-chip {display:inline-flex;align-items:center;white-space:nowrap;padding:4px 7px;border-radius:4px;font-size:9px;font-weight:500;background:#eef2f5;color:#667d8e;}
+.status-green {background:#e9f5ee;color:#297856;}
+.status-amber {background:#fff3db;color:#996c23;}
+.demo-dialog {margin:auto;padding:0;width:min(660px,calc(100vw - 28px));max-height:87vh;overflow:auto;border:1px solid var(--border);border-radius:14px;box-shadow:0 25px 100px #122a3940;background:#fff;color:var(--ink);}
+.demo-dialog::backdrop {background:#142c4166;backdrop-filter:blur(3px);}
+button:not(:disabled),a,select {touch-action:manipulation;}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible {outline:2px solid #5faaa0;outline-offset:4px;}
+@media(max-width:640px){.metric-tile{padding:17px 15px}.resource-tile{padding:20px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}

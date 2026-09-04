@@ -22,7 +22,7 @@ export default function DemandPage() {
       <PageHeader
         eyebrow="Efterfrågan utan tillgång"
         title="Det era användare letar efter men inte når"
-        description="Nekade åtkomster (turnaways) registreras varje gång någon på KTH försöker öppna innehåll utanför era licenser. Det är den tydligaste signalen om vad som saknas i beståndet."
+        description="Utforska syntetiska exempel på efterfrågan utanför KTH:s tilldelade produkter. Ingen verklig användning eller nekad åtkomst hämtas i denna demo."
       />
 
       <KpiStrip
@@ -34,11 +34,11 @@ export default function DemandPage() {
             hint: 'mot fg. år',
             signal: true,
           },
-          { label: 'Berörda användare', value: fmtNumber(users), hint: 'unika, alla titlar' },
+          { label: 'Berörda användare', value: fmtNumber(users), hint: 'summerat per titel, demo' },
           {
             label: 'Uppskattad kostnad att täcka',
             value: fmtSek(cost),
-            hint: 'listpris, före konsortierabatt',
+            hint: 'påhittat prisexempel',
           },
           {
             label: 'Kostnad per nekad',

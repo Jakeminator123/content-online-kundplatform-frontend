@@ -24,12 +24,12 @@ type NavItem = {
 
 const items: NavItem[] = [
   { href: '/', label: 'Överblick', icon: LayoutGrid },
-  { href: '/anvandning', label: 'Nyttjande', icon: BarChart3 },
+  { href: '/anvandning', label: 'Produkter & nyttjande', icon: BarChart3 },
   { href: '/efterfragan', label: 'Efterfrågan', icon: Sparkles, badge: '5' },
   { href: '/nyheter', label: 'Från förlagen', icon: Newspaper },
   { href: '/dokument', label: 'Dokument', icon: FolderLock },
-  { href: '/kundservice', label: 'Kundservice & källdata', icon: Settings2 },
-  { href: '/admin', label: 'KTH:s portaladministration', icon: Settings2, adminOnly: true },
+  { href: '/kundservice', label: 'Kundservice', icon: Settings2 },
+  { href: '/admin', label: 'KTH:s användare', icon: Settings2, adminOnly: true },
 ]
 
 export function SidebarNav({ role, onNavigate }: { role: Role; onNavigate?: () => void }) {
@@ -48,9 +48,9 @@ export function SidebarNav({ role, onNavigate }: { role: Role; onNavigate?: () =
               onClick={onNavigate}
               aria-current={active ? 'page' : undefined}
               className={cn(
-                'group flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors',
+                'group flex items-center gap-3 rounded-lg px-3 py-2.5 text-[13px] transition-colors',
                 active
-                  ? 'bg-sidebar-accent text-sidebar-accent-foreground'
+                  ? 'bg-sidebar-accent text-sidebar-accent-foreground shadow-[inset_3px_0_0_#7cd6c1]'
                   : 'text-sidebar-foreground hover:bg-sidebar-accent/60 hover:text-sidebar-accent-foreground',
               )}
             >

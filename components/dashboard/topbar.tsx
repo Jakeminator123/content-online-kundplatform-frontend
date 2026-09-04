@@ -23,7 +23,7 @@ export function Topbar({ user, dateLabel }: { user: User; dateLabel: string }) {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-20 flex h-14 items-center justify-between gap-4 border-b bg-background/85 px-4 backdrop-blur md:px-8">
+    <header className="sticky top-0 z-20 flex h-[72px] items-center justify-between gap-4 border-b bg-card/95 px-4 backdrop-blur md:px-8">
       <div className="flex items-center gap-3">
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger
@@ -36,7 +36,7 @@ export function Topbar({ user, dateLabel }: { user: User; dateLabel: string }) {
             <SidebarContent role={user.role} onNavigate={() => setOpen(false)} />
           </SheetContent>
         </Sheet>
-        <p className="hidden text-sm text-muted-foreground sm:block">{dateLabel}</p>
+        <div className="text-xs text-muted-foreground"><span className="mr-3 hidden sm:inline">Kundportal /</span><span className="font-medium text-foreground">KTH</span><p className="mt-1 hidden text-[10px] md:block">{dateLabel}</p></div>
       </div>
 
       <div className="flex items-center gap-3">

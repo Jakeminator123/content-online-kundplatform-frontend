@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Badge } from '@/components/ui/badge'
 import type { NewsItem } from '@/lib/data'
 import { fmtDate } from '@/lib/format'
@@ -14,9 +15,9 @@ export function NewsList({ items, detailed = false }: { items: NewsItem[]; detai
   return (
     <ul className="divide-y overflow-hidden rounded-xl border bg-card">
       {items.map((n) => (
-        <li key={n.id}>
-          <a
-            href="#"
+        <li key={n.id} id={n.id} className="scroll-mt-24">
+          <Link
+            href={`/nyheter#${n.id}`}
             className="flex flex-col gap-3 p-5 transition-colors hover:bg-muted/50 md:flex-row md:items-start md:gap-6"
           >
             <div className="flex shrink-0 flex-col gap-1 md:w-36">
@@ -25,7 +26,7 @@ export function NewsList({ items, detailed = false }: { items: NewsItem[]; detai
             </div>
             <div className="flex min-w-0 flex-1 flex-col gap-2">
               <div className="flex flex-wrap items-center gap-2">
-                <Badge className={cn('font-normal', tagStyle[n.tag])}>{n.tag}</Badge>
+                <Badge className={cn('font-normal', tagStyle[n.tag])}>{n.tag} · demo</Badge>
                 <span className="text-xs text-primary">{n.relevance}</span>
               </div>
               <h3 className="text-balance font-medium leading-snug">{n.title}</h3>
@@ -35,7 +36,7 @@ export function NewsList({ items, detailed = false }: { items: NewsItem[]; detai
                 </p>
               ) : null}
             </div>
-          </a>
+          </Link>
         </li>
       ))}
     </ul>

@@ -12,9 +12,9 @@ export default async function LoginPage({
   const { next } = await searchParams
 
   const facts = [
-    { label: 'Fulltextnedladdningar i år', value: fmtCompact(totals.requestsYtd) },
+    { label: 'Användning · demo', value: fmtCompact(totals.requestsYtd) },
     { label: 'Tillväxt mot föregående år', value: fmtPercent(totals.requestsGrowth, true) },
-    { label: 'Kostnad per nedladdning', value: fmtSekPrecise(totals.costPerRequest) },
+    { label: 'Årsbudget / användning · demo', value: fmtSekPrecise(totals.costPerRequest) },
   ]
 
   return (
@@ -39,7 +39,7 @@ export default async function LoginPage({
 
         <div className="relative flex flex-col gap-10">
           <h1 className="max-w-md text-balance text-4xl font-medium leading-[1.1] tracking-tight text-sidebar-primary xl:text-5xl">
-            Kvitto på varje krona ni lägger på kunskap.
+            Kunskapen ni behöver. Överblicken ni saknar.
           </h1>
           <dl className="grid max-w-lg grid-cols-3 gap-6 border-t border-sidebar-border pt-6">
             {facts.map((f) => (
@@ -63,27 +63,17 @@ export default async function LoginPage({
             <p className="text-sm font-medium">{organisation.unit}</p>
           </div>
           <div className="flex flex-col gap-2">
-            <h2 className="text-2xl font-medium tracking-tight">Logga in</h2>
+            <p className="mb-1 text-[10px] font-semibold uppercase tracking-[.2em] text-primary">KTH / KUNDPORTAL</p><h2 className="text-3xl font-semibold tracking-tight">Välkommen in.</h2>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Använd ditt {organisation.name}-konto för att nå er överblick över resurser, nyttjande
-              och avtal.
+              Välj Hampus eller Bibbi nedan för att utforska KTH:s demoportal. Riktig kundinloggning är ännu inte ansluten.
             </p>
           </div>
           <LoginForm next={next} />
           <Link href="/content-online/login" className="text-sm font-medium text-primary underline underline-offset-4">
-            Personal på Content Online →
+            Intern inloggning för Content Online →
           </Link>
           <p className="text-xs text-muted-foreground">Demomiljö med exempeldata. KTH:s riktiga inloggning är inte ansluten.</p>
-          <p className="text-xs leading-relaxed text-muted-foreground">
-            Behöver du åtkomst? Kontakta {organisation.accountManager.name},{' '}
-            <a
-              href={`mailto:${organisation.accountManager.email}`}
-              className="underline decoration-border underline-offset-4 hover:text-foreground"
-            >
-              {organisation.accountManager.email}
-            </a>
-            .
-          </p>
+          <a href="https://content-online-platform.vercel.app/demo" className="rounded-xl border bg-card p-4 text-sm"><span className="mb-1 block font-medium">Vill du se systemägarens arbetsyta? ↗</span><span className="text-xs text-muted-foreground">Utforska Content Online-demo utan inloggning.</span></a>
         </div>
       </section>
     </main>

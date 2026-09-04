@@ -67,3 +67,16 @@ To learn more, take a look at the following resources:
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 - [v0 Documentation](https://v0.app/docs) - learn about v0 and how to use it.
+
+
+## Visuell MVP / september 2026
+
+- Kundportalen har en gemensam design för KTH:s överblick, produkter, nyttjande, dokument, kundservice och kundadministration.
+- Produktkorten har sökning, typfilter, detaljer och CSV-export med uttrycklig demomärkning, källa, period och definition. CSV-exporten gäller aktuellt filter.
+- Dokument öppnar en förhandsvisning av syntetisk metadata; det finns inga uppladdade originalfiler. Avtal/fakturor döljs för läsaren i dokumentvyn och överblicken.
+- Kundservice i publicerad demo visar ett formulär med förhandsvisning. Inget ärende skickas eller sparas; formulärets text försvinner vid omladdning. Lokal backendintegration behålls för lokal utveckling.
+- Månadsgrafen använder januari–augusti 2026, med summor som stämmer med syntetisk produktportfölj och skoluppdelning.
+- Exempelnyheter, priser, dokument och användning är påhittade. Kundauth är fortfarande demonstrationsauth. Ingen riktig kundinformation ska kopplas in innan serververifierad identitet och beständiga medlemskap är klara.
+- Content Onlines separata publika visningsdemo: https://content-online-platform.vercel.app/demo. Den ger inte behörighet till interna admin-API:er.
+
+Verifiering: `npm run typecheck`, `npm test`, `npm run build`.

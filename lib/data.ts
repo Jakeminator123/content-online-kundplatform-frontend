@@ -137,29 +137,6 @@ export const resources: Resource[] = [
   },
 ]
 
-export const monthlyUsage = [
-  { month: 'Jan', requests: 148_200, searches: 92_400, denials: 4_120 },
-  { month: 'Feb', requests: 176_900, searches: 108_300, denials: 4_980 },
-  { month: 'Mar', requests: 201_400, searches: 121_700, denials: 5_610 },
-  { month: 'Apr', requests: 189_300, searches: 114_900, denials: 5_240 },
-  { month: 'Maj', requests: 210_800, searches: 126_200, denials: 6_130 },
-  { month: 'Jun', requests: 142_600, searches: 84_100, denials: 3_870 },
-  { month: 'Jul', requests: 88_100, searches: 51_300, denials: 2_210 },
-  { month: 'Aug', requests: 132_500, searches: 79_800, denials: 3_960 },
-  { month: 'Sep', requests: 224_700, searches: 138_400, denials: 6_720 },
-  { month: 'Okt', requests: 236_100, searches: 144_900, denials: 7_140 },
-  { month: 'Nov', requests: 228_900, searches: 139_200, denials: 6_980 },
-  { month: 'Dec', requests: 161_400, searches: 96_700, denials: 4_450 },
-]
-
-export const departmentUsage = [
-  { code: 'EECS', name: 'Elektroteknik och datavetenskap', requests: 612_400, share: 35 },
-  { code: 'SCI', name: 'Teknikvetenskap', requests: 388_900, share: 22 },
-  { code: 'CBH', name: 'Kemi, bioteknologi och hälsa', requests: 341_200, share: 20 },
-  { code: 'ITM', name: 'Industriell teknik och management', requests: 232_700, share: 13 },
-  { code: 'ABE', name: 'Arkitektur och samhällsbyggnad', requests: 165_900, share: 10 },
-]
-
 export type Turnaway = {
   id: string
   title: string
@@ -355,7 +332,7 @@ export const documents: Document[] = [
   },
   {
     id: 'd6',
-    name: 'COUNTER 5.1 TR_J1 – alla plattformar, jan–aug.xlsx',
+    name: 'Produktrapport – syntetiskt exempel, jan–aug.xlsx',
     category: 'Rapport',
     size: '412 kB',
     updatedAt: '2026-09-01',
@@ -395,3 +372,26 @@ export const totals = (() => {
     renewalsSoon: resources.filter((r) => r.status === 'Förnyelse snart').length,
   }
 })()
+
+const demoUsageTotal = resources.reduce((sum, r) => sum + r.requestsYtd, 0)
+const monthWeights = [148200, 176900, 201400, 189300, 210800, 142600, 88100, 132500]
+const monthWeightTotal = monthWeights.reduce((a,b) => a+b,0)
+const monthValues = monthWeights.map(w => Math.round(w / monthWeightTotal * demoUsageTotal))
+monthValues[7] += demoUsageTotal - monthValues.reduce((a,b) => a+b,0)
+const denialWeights = [4120,4980,5610,5240,6130,3870,2210,3960]
+const totalDenialWeight = denialWeights.reduce((a,b) => a+b,0)
+const denialValues = denialWeights.map(w => Math.round(w / totalDenialWeight * totals.denialsYtd))
+denialValues[7] += totals.denialsYtd - denialValues.reduce((a,b) => a+b,0)
+export const monthlyUsage = ['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug'].map((month,i) => ({
+  month, requests: monthValues[i], searches: Math.round(monthValues[i] * .62), denials: denialValues[i],
+}))
+const schools = [
+  { code:'EECS', name:'Elektroteknik och datavetenskap',share:35 },
+  { code:'SCI', name:'Teknikvetenskap',share:22 },
+  { code:'CBH', name:'Kemi, bioteknologi och hälsa',share:20 },
+  { code:'ITM', name:'Industriell teknik och management',share:13 },
+  { code:'ABE', name:'Arkitektur och samhällsbyggnad',share:10 },
+]
+export const departmentUsage = schools.map(s => ({...s, requests: Math.round(demoUsageTotal * s.share / 100)}))
+
+departmentUsage[4].requests += demoUsageTotal - departmentUsage.reduce((sum,d) => sum + d.requests, 0)

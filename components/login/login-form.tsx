@@ -8,8 +8,8 @@ import { Label } from '@/components/ui/label'
 import { loginAction, type LoginState } from '@/app/login/actions'
 
 const DEMO_ACCOUNTS = [
-  { username: 'Bibbi', password: 'Mallorca123', role: 'Personal', icon: User },
-  { username: 'Hampus', password: 'Mallorca123', role: 'Admin', icon: ShieldCheck },
+  { username: 'Bibbi', password: 'Mallorca123', role: 'Läsare', icon: User },
+  { username: 'Hampus', password: 'Mallorca123', role: 'Kundadministratör', icon: ShieldCheck },
 ]
 
 export function LoginForm({ next }: { next?: string }) {
@@ -38,9 +38,7 @@ export function LoginForm({ next }: { next?: string }) {
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between">
           <Label htmlFor="password">Lösenord</Label>
-          <a href="#" className="text-xs text-muted-foreground hover:text-foreground">
-            Glömt lösenord?
-          </a>
+<span className="text-[10px] text-muted-foreground">Endast demokonton</span>
         </div>
         <Input
           id="password"
@@ -66,7 +64,7 @@ export function LoginForm({ next }: { next?: string }) {
       </Button>
 
       <fieldset className="flex flex-col gap-2 rounded-lg border border-dashed p-3">
-        <legend className="px-1 text-xs font-medium text-muted-foreground">Demokonton</legend>
+        <legend className="px-1 text-xs font-medium text-muted-foreground">Välj en demoroll</legend>
         <div className="grid grid-cols-2 gap-2">
           {DEMO_ACCOUNTS.map((acc) => (
             <button

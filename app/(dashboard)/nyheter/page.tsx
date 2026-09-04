@@ -8,7 +8,7 @@ export default function NewsPage() {
       <PageHeader
         eyebrow="Från förlagen"
         title="Nyheter som rör ert bestånd"
-        description="Produktlanseringar, uppdateringar och erbjudanden från de förlag ni redan arbetar med – filtrerat på vad som är relevant för KTH:s användning och efterfrågan."
+        description="Exempel på hur relevanta publicistnyheter kan visas för KTH. Texter, erbjudanden och datum är påhittat demoinnehåll."
       />
       <NewsList items={news} detailed />
     </>

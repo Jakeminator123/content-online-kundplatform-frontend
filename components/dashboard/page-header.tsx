@@ -13,11 +13,11 @@ export function PageHeader({
     <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
       <div className="flex flex-col gap-2">
         {eyebrow ? (
-          <p className="text-xs font-medium uppercase tracking-wider text-primary">{eyebrow}</p>
+          <p className="text-[10px] font-semibold uppercase tracking-[.18em] text-primary">{eyebrow}</p>
         ) : null}
-        <h1 className="text-balance text-3xl font-medium tracking-tight md:text-4xl">{title}</h1>
+        <h1 className="text-balance text-3xl font-semibold tracking-[-.04em] md:text-[38px]">{title}</h1>
         {description ? (
-          <p className="max-w-2xl text-pretty leading-relaxed text-muted-foreground">{description}</p>
+          <p className="max-w-2xl text-pretty text-[13px] leading-relaxed text-muted-foreground">{description}</p>
         ) : null}
       </div>
       {action ? <div className="shrink-0">{action}</div> : null}
@@ -37,8 +37,8 @@ export function SectionHeader({
   return (
     <div className="flex items-end justify-between gap-4">
       <div className="flex flex-col gap-1">
-        <h2 className="text-lg font-medium tracking-tight">{title}</h2>
-        {description ? <p className="text-sm text-muted-foreground">{description}</p> : null}
+        <h2 className="text-base font-semibold tracking-tight">{title}</h2>
+        {description ? <p className="text-[11px] leading-relaxed text-muted-foreground">{description}</p> : null}
       </div>
       {action}
     </div>
