@@ -6,8 +6,8 @@ import { authenticate, createSession, destroySession } from '@/lib/auth'
 export type LoginState = { error?: string } | undefined
 
 export async function loginAction(_prev: LoginState, formData: FormData): Promise<LoginState> {
-  const username = String(formData.get('username') ?? '')
-  const password = String(formData.get('password') ?? '')
+  const username = String(formData.get('username') ?? '').trim()
+  const password = String(formData.get('password') ?? '').trim()
   const next = String(formData.get('next') ?? '/')
 
   if (!username || !password) {
