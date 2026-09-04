@@ -1,7 +1,6 @@
-import { ShieldCheck, UserPlus, UserRound } from 'lucide-react'
+import { ShieldCheck, UserRound } from 'lucide-react'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import {
   Table,
   TableBody,
@@ -23,22 +22,16 @@ export default async function AdminPage() {
     { label: 'Organisation', value: organisation.fullName },
     { label: 'Enhet', value: organisation.unit },
     { label: 'Avtalsperiod', value: `${fmtDate(organisation.fiscalYearStart)} – ${fmtDate(organisation.fiscalYearEnd)}` },
-    { label: 'Datakälla nyttjande', value: 'COUNTER 5.1 via SUSHI, hämtas den 5:e varje månad' },
+    { label: 'Datakälla nyttjande', value: 'Syntetisk demodata – ingen automatisk import är ansluten' },
     { label: 'Key Account Manager', value: organisation.accountManager.name },
   ]
 
   return (
     <>
       <PageHeader
-        eyebrow="Administration"
-        title="Konton och inställningar"
-        description="Hantera vem på KTH som har tillgång till portalen och vilken behörighet de har. Administratörer kan ladda upp dokument och bjuda in kollegor."
-        action={
-          <Button className="gap-2">
-            <UserPlus className="size-4" />
-            Bjud in kollega
-          </Button>
-        }
+        eyebrow="KTH:s portaladministration"
+        title="Användare och portalinformation"
+        description="Kundadministratören ser KTH:s egna portalanvändare och inställningar. Ändringar begärs via kundservice tills säker medlemshantering är ansluten."
       />
 
       <section className="flex flex-col gap-5">
@@ -50,7 +43,7 @@ export default async function AdminPage() {
                 <TableHead className="pl-5">Namn</TableHead>
                 <TableHead>Roll på KTH</TableHead>
                 <TableHead>Behörighet</TableHead>
-                <TableHead className="pr-5 text-right">Åtgärd</TableHead>
+                <TableHead className="pr-5 text-right">Status</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -77,13 +70,11 @@ export default async function AdminPage() {
                       ) : (
                         <UserRound className="size-3" />
                       )}
-                      {u.role === 'admin' ? 'Administratör' : 'Personal'}
+                      {u.role === 'admin' ? 'Kundadministratör' : 'Läsare'}
                     </Badge>
                   </TableCell>
                   <TableCell className="pr-5 text-right">
-                    <Button variant="ghost" size="sm">
-                      Ändra
-                    </Button>
+                    <span className="text-xs text-muted-foreground">Visningsläge</span>
                   </TableCell>
                 </TableRow>
               ))}

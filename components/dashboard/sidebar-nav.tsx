@@ -29,7 +29,7 @@ const items: NavItem[] = [
   { href: '/nyheter', label: 'Från förlagen', icon: Newspaper },
   { href: '/dokument', label: 'Dokument', icon: FolderLock },
   { href: '/kundservice', label: 'Kundservice & källdata', icon: Settings2 },
-  { href: '/admin', label: 'Administration', icon: Settings2, adminOnly: true },
+  { href: '/admin', label: 'KTH:s portaladministration', icon: Settings2, adminOnly: true },
 ]
 
 export function SidebarNav({ role, onNavigate }: { role: Role; onNavigate?: () => void }) {

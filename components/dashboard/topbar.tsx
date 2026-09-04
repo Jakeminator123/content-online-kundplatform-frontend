@@ -49,7 +49,7 @@ export function Topbar({ user, dateLabel }: { user: User; dateLabel: string }) {
           ) : (
             <UserRound className="size-3" />
           )}
-          {user.role === 'admin' ? 'Administratör' : 'Personal'}
+          {user.role === 'admin' ? 'Kundadministratör' : 'Läsare'}
         </Badge>
 
         <DropdownMenu>

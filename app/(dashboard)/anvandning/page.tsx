@@ -1,5 +1,3 @@
-import { Download } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { DepartmentBars } from '@/components/dashboard/department-bars'
 import { KpiStrip } from '@/components/dashboard/kpi-strip'
 import { PageHeader, SectionHeader } from '@/components/dashboard/page-header'
@@ -22,15 +20,9 @@ export default function UsagePage() {
   return (
     <>
       <PageHeader
-        eyebrow="Nyttjande · COUNTER 5.1"
+        eyebrow="Nyttjande · syntetisk demo"
         title="Vad ni får för pengarna"
-        description="Samlad nyttjandestatistik för alla inköpta plattformar, normaliserad enligt COUNTER 5.1 (TR_J1, TR_B1, DR_D1). Uppdateras månadsvis."
-        action={
-          <Button variant="outline" className="gap-2">
-            <Download className="size-4" />
-            Exportera rapport
-          </Button>
-        }
+        description="Exempel på hur KTH:s tilldelade produkter kan följas. Siffrorna är syntetiska och ingen automatisk COUNTER-, SUSHI- eller publicistimport är ansluten."
       />
 
       <KpiStrip
